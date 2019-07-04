@@ -24,10 +24,10 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 public class HttpFileServerHandler extends
         SimpleChannelInboundHandler<FullHttpRequest> {
-    private final String url;
+    private final String context;
 
     public HttpFileServerHandler(String url) {
-        this.url = url;
+        this.context = url;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class HttpFileServerHandler extends
 
     private String sanitizeUri(String uri) {
         try {
-            uri = URLDecoder.decode(uri, "UTF-8");
+            uri = URLDecoder.decode(context + uri, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             try {
                 uri = URLDecoder.decode(uri, "ISO-8859-1");
@@ -128,7 +128,7 @@ public class HttpFileServerHandler extends
                 throw new Error();
             }
         }
-        if (!uri.startsWith(url)) {
+        if (!uri.startsWith(context)) {
             return null;
         }
         if (!uri.startsWith("/")) {
@@ -140,7 +140,7 @@ public class HttpFileServerHandler extends
                 || uri.endsWith(".") || INSECURE_URI.matcher(uri).matches()) {
             return null;
         }
-        return System.getProperty("user.dir") + File.separator + uri;
+        return uri;
     }
 
     private static final Pattern ALLOWED_FILE_NAME = Pattern

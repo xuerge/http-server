@@ -6,11 +6,18 @@ The different is this http-server implement by java and netty
 
 ### Install
 
+install cmd `http-server` on envoriment
 ```bash
-# install on envoriment
-install 
+install ./bin/install.sh
 ```
 
-
-
 ### Usage
+start http-server
+```bash
+http-server
+```
+
+### available Options:
+-p port (defaults to 8080)
+
+-d Path (defaults to ./)

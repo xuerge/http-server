@@ -14,7 +14,7 @@ import io.netty.handler.stream.ChunkedWriteHandler;
 
 public class HttpFileServer {
 
-    private static final String DEFAULT_URL = "/";
+    private static final String DEFAULT_URL = "/Users/xuerge/";
 
     public void run(final int port, final String url) throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -63,5 +63,6 @@ public class HttpFileServer {
         if (args.length > 1)
             url = args[1];
         new HttpFileServer().run(port, url);
+//        System.out.println(args[0]);
     }
 }
